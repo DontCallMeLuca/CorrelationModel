@@ -11,8 +11,9 @@ import numpy as np
 
 class CorrelationModel:
 
-    def __init__(self, dataset: pd.DataFrame) -> None:
+    def __init__(self, dataset: pd.DataFrame, target_feature_label: str) -> None:
 
+        self._target_label: str = target_feature_label
         self._dataset: pd.DataFrame = dataset
         self._scaler: StandardScaler = StandardScaler()
 
@@ -24,13 +25,18 @@ class CorrelationModel:
         '''Represents as string'''
         return self._algorithm
     
+    def __str__(self) -> str:
+        return self.__repr__()
+    
     def __del__(self) -> None:
-
         '''Deletes objects'''
-
         del self._dataset
         del self._algorithm
         del self._scaler
+
+    @property
+    def target_label(self) -> str:
+        return self._target_label
     
     @property
     def dataset(self) -> pd.DataFrame:
@@ -55,13 +61,12 @@ class CorrelationModel:
     @property
     def X(self) -> pd.DataFrame:
         '''Returns X Property As Df - Y'''
-        return self.dataset.drop('Price_euros', 
-                                  axis = 1)
+        return self.dataset.drop(self.target_label, axis = 1)
 
     @property
     def y(self) -> pd.Series:
-        '''Returns y Series (Price)'''
-        return self.dataset['Price_euros']
+        '''Returns y Series'''
+        return self.dataset[self.target_label]
 
     @property
     def model(self) -> object:
