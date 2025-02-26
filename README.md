@@ -50,7 +50,7 @@ Each tree is built by:
 
 ```math
 \begin{alignat*}{2}
-& s^* = \argmax_{s} \left[\text{Var}(Y_p) - \left(\frac{n_l}{n_p}\text{Var}(Y_l) + \frac{n_r}{n_p}\text{Var}(Y_r)\right)\right]
+& s^* = \max_{s} \left[\text{Var}(Y_p) - \left(\frac{n_l}{n_p}\text{Var}(Y_l) + \frac{n_r}{n_p}\text{Var}(Y_r)\right)\right]
 \end{alignat*}
 ```
 
